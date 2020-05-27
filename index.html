@@ -5,43 +5,57 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <script src="dev-lib/jquery-1.11.0.min.js"></script>
+    <!--kity公式-->
     <script src="dev-lib/kitygraph.all.js"></script>
+    <!--公式渲染：添加window.kf-->
     <script src="dev-lib/kity-formula-render.all.js"></script>
+
+    <!--公式解析：添加window.kf.Parser window.kf.Assembly-->
     <script src="dev-lib/kity-formula-parser.all.js"></script>
+
+    <!--定义inc。全局require以及define等-->
     <script src="dev-lib/dev-define.js"></script>
+
+    <!--配置base位置-->
     <script>
         inc.config({
             base: './src'
-        });
+        })
     </script>
-    <script src="dev-lib/exports.js"></script>
-    <script src="dev-lib/start.js"></script>
-    <script src="dev-lib/dev-start.js"></script>
-    <!--<script src="dist/kityformula-editor.all.min.js"></script>-->
-    <script>
-        jQuery( function ($) {
 
-            var factory = kf.EditorFactory.create( $( "#kfEditorContainer" )[ 0 ], {
+    <!--加载window.kf-->
+    <script src="dev-lib/exports.js"></script>
+
+    <!--注册组件以及工厂-->
+    <script src="dev-lib/start.js"></script>
+
+    <!--启动编辑器-->
+    <script src="dev-lib/dev-start.js"></script>
+    <!--&lt;!&ndash;<script src="dist/kityformula-editor.all.min.js"></script>&ndash;&gt;-->
+    <script>
+        jQuery(function ($) {
+            console.log(kf)
+            var factory = kf.EditorFactory.create($('#kfEditorContainer')[0], {
                 render: {
                     fontsize: 40
                 },
                 resource: {
                     path: 'resource/'
                 }
-            } );
+            })
 
-            factory.ready( function ( KFEditor ) {
+            factory.ready(function (KFEditor) {
 
                 // this指向KFEditor
 
-                this.execCommand( "render", "abcdeafdapoiuoiuomassdfasdfasdfasjkljpoijdf" );
-                this.execCommand( "focus" );
+                this.execCommand('render', 'abcdeafdapoiuoiuomassdfasdfasdfasjkljpoijdf')
+                this.execCommand('focus')
 
-                window.kfe = this;
+                window.kfe = this
 
-            } );
+            })
 
-        } );
+        })
     </script>
     <link rel="stylesheet" href="assets/styles/page.css">
     <link rel="stylesheet" href="assets/styles/base.css">
@@ -49,6 +63,7 @@
     <link rel="stylesheet" href="assets/styles/scrollbar.css">
 </head>
 <body>
-    <div id="kfEditorContainer" class="kf-editor" style="width: 780px; height: 502px; position: absolute; top: 20px; left: 50px;"></div>
+<div id="kfEditorContainer" class="kf-editor"
+     style="width: 780px; height: 502px; position: absolute; top: 20px; left: 50px;"></div>
 </body>
 </html>

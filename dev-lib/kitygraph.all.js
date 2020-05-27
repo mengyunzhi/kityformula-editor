@@ -4043,21 +4043,26 @@ define("graphic/matrix", [ "core/utils", "graphic/box", "core/class", "graphic/p
           case "top":
             // 以顶层绘图容器（视野）为参照坐标系
             if (target.getPaper()) {
-                ctm = target.node.getTransformToElement(target.getPaper().shapeNode);
+                const node = target.getPaper().shapeNode;
+                ctm = node.getScreenCTM().inverse().multiply(target.node.getScreenCTM());
+                // ctm = target.node.getTransformToElement();
             }
             break;
 
           case "parent":
             // 以父容器为参照坐标系
             if (target.node.parentNode) {
-                ctm = target.node.getTransformToElement(target.node.parentNode);
+                const node = target.node.parentNode;
+                ctm = node.getScreenCTM().inverse().multiply(target.node.getScreenCTM());
+                // ctm = target.node.getTransformToElement();
             }
             break;
 
           default:
             // 其他情况，指定参照物
             if (refer.node) {
-                ctm = target.node.getTransformToElement(refer.shapeNode || refer.node);
+                const node = refer.shapeNode || refer.node;
+                ctm = node.getScreenCTM().inverse().multiply(target.node.getScreenCTM());
             }
         }
         return ctm ? new Matrix(ctm.a, ctm.b, ctm.c, ctm.d, ctm.e, ctm.f) : new Matrix();
