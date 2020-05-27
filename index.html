@@ -31,11 +31,10 @@
 
     <!--启动编辑器-->
     <script src="dev-lib/dev-start.js"></script>
-    <!--&lt;!&ndash;<script src="dist/kityformula-editor.all.min.js"></script>&ndash;&gt;-->
+
     <script>
         jQuery(function ($) {
-            console.log(kf)
-            var factory = kf.EditorFactory.create($('#kfEditorContainer')[0], {
+            const factory = kf.EditorFactory.create(document.getElementById('kfEditorContainer'), {
                 render: {
                     fontsize: 40
                 },
@@ -44,15 +43,11 @@
                 }
             })
 
-            factory.ready(function (KFEditor) {
-
+            factory.ready( (editor) => {
                 // this指向KFEditor
-
-                this.execCommand('render', 'abcdeafdapoiuoiuomassdfasdfasdfasjkljpoijdf')
-                this.execCommand('focus')
-
-                window.kfe = this
-
+                editor.execCommand('render', 'a^2_b');
+                editor.execCommand('focus')
+                window.kfe = editor;
             })
 
         })
