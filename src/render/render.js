@@ -49,10 +49,12 @@ define( function ( require ) {
 
             initCanvas: function () {
 
-                var canvasContainer = this.kfEditor.requestService( "ui.get.canvas.container" ),
-                    Formula = this.kfEditor.getFormulaClass();
-
-                this.assembly = new Assembly( new Formula( canvasContainer, this.options ) );
+                var canvasContainer = this.kfEditor.requestService( "ui.get.canvas.container" );
+                var  Formula = this.kfEditor.getFormulaClass();
+                console.log(Formula);
+                var formula = new Formula( canvasContainer, this.options );
+                console.log(formula);
+                this.assembly = new Assembly(formula);
                 this.formula = this.assembly.formula;
                 this.setCanvasToCenter();
 

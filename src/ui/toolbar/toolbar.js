@@ -53,15 +53,18 @@ define( function ( require ) {
                 var _self = this;
 
                 $$.on( this.uiComponent.toolbarContainer, "mousedown", function ( e ) {
+                    console.log('toolbarContainer mousedown');
                     e.preventDefault();
                 } );
 
                 $$.on( this.uiComponent.toolbarContainer, "mousewheel", function ( e ) {
+                    console.log('toolbarContainer mousewheel');
                     e.preventDefault();
                 } );
 
                 // 通知所有组件关闭
                 $$.on( this.kfEditor.getContainer(), "mousedown", function () {
+                    console.log('container mousedown -> closeAll');
                     _self.notify( "closeAll" );
                 } );
 

@@ -47,11 +47,12 @@ define( function ( require ) {
                 this.canvasContainer = createCanvasContainer( currentDocument );
                 this.scrollbarContainer = createScrollbarContainer( currentDocument );
 
-                this.toolbarWrap.appendChild( this.toolbarContainer );
+                
                 this.container.appendChild( this.toolbarWrap );
+                this.toolbarWrap.appendChild( this.toolbarContainer );
                 this.editArea.appendChild( this.canvasContainer );
                 this.container.appendChild( this.editArea );
-                this.container.appendChild( this.scrollbarContainer );
+                // this.container.appendChild( this.scrollbarContainer );
 
                 this.initComponents();
 

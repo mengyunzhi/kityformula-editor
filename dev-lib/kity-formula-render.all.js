@@ -4225,7 +4225,9 @@ _p[25] = {
                 if (!FONT_LIST[fontFamily]) {
                     return null;
                 }
-                return FONT_LIST[fontFamily].map[key] || null;
+                var font = FONT_LIST[fontFamily];
+                var fontMap = font.map;
+                return font.map[key] || null;
             }
         };
     }
@@ -4862,7 +4864,8 @@ _p[31] = {
             if (!expression) {
                 return;
             }
-            if (expression.getType() === GTYPE.EXP) {
+            var type = expression.getType();
+            if (type === GTYPE.EXP) {
                 for (var i = 0, len = expression.getChildren().length; i < len; i++) {
                     notifyExpression(expression.getChild(i));
                 }
@@ -4874,7 +4877,9 @@ _p[31] = {
                 // 处理操作符
                 notifyExpression(expression.getOperator());
             }
-            expression.addedCall && expression.addedCall();
+            if (expression.addedCall) {
+                expression.addedCall();
+            }
         }
         return Formula;
     }
@@ -5088,7 +5093,12 @@ _p[37] = {
             },
             applySideSuper: function(target, sup) {
                 sup.scale(this.options.zoom);
-                var targetRectBox = target.getRenderBox(this.observer), supRectBox = sup.getRenderBox(this.observer), targetMeanline = target.getMeanline(this.observer), supBaseline = sup.getBaseline(this.observer), positionline = targetMeanline, diff = supBaseline - positionline, space = {
+                var targetRectBox = target.getRenderBox(this.observer),
+                    supRectBox = sup.getRenderBox(this.observer),
+                    targetMeanline = target.getMeanline(this.observer),
+                    supBaseline = sup.getBaseline(this.observer),
+                    positionline = targetMeanline,
+                    diff = supBaseline - positionline, space = {
                     top: 0,
                     bottom: 0,
                     width: targetRectBox.width + supRectBox.width,
@@ -5130,7 +5140,10 @@ _p[37] = {
             applySideScript: function(target, sup, sub) {
                 sup.scale(this.options.zoom);
                 sub.scale(this.options.zoom);
-                var targetRectBox = target.getRenderBox(this.observer), subRectBox = sub.getRenderBox(this.observer), supRectBox = sup.getRenderBox(this.observer), targetMeanline = target.getMeanline(this.observer), targetBaseline = target.getBaseline(this.observer), supBaseline = sup.getBaseline(this.observer), // 上下标都存在时， 下标的定位以上伸线为准
+                var targetRectBox = target.getRenderBox(this.observer), subRectBox = sub.getRenderBox(this.observer), supRectBox = sup.getRenderBox(this.observer);
+                var targetMeanline = target.getMeanline(this.observer);
+                var targetBaseline = target.getBaseline(this.observer);
+                var supBaseline = sup.getBaseline(this.observer), // 上下标都存在时， 下标的定位以上伸线为准
                 subAscenderline = sub.getAscenderline(this.observer), supPosition = targetMeanline, subPosition = targetMeanline + (targetBaseline - targetMeanline) * 2 / 3, topDiff = supPosition - supBaseline, bottomDiff = targetRectBox.height - subPosition - (subRectBox.height - subAscenderline), space = {
                     top: 0,
                     bottom: 0,

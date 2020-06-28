@@ -58,7 +58,8 @@ _p[0] = {
                 //TODO return值统一
                 throw new Error("Unhandled error");
             } else {
-                this.formula.appendExpression(generateExpression(tree, deepCopy(tree), objTree, mapping, selectInfo));
+                const expression = generateExpression(tree, deepCopy(tree), objTree, mapping, selectInfo);
+                this.formula.appendExpression(expression);
                 return {
                     select: selectInfo,
                     parsedTree: tree,

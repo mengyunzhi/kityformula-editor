@@ -7,6 +7,7 @@
     <script src="dev-lib/jquery-1.11.0.min.js"></script>
     <!--kity公式-->
     <script src="dev-lib/kitygraph.all.js"></script>
+
     <!--公式渲染：添加window.kf-->
     <script src="dev-lib/kity-formula-render.all.js"></script>
 
@@ -45,7 +46,7 @@
 
             factory.ready( (editor) => {
                 // this指向KFEditor
-                editor.execCommand('render', 'a^2_b');
+                editor.execCommand('render', 'a^2_1');
                 editor.execCommand('focus')
                 window.kfe = editor;
             })

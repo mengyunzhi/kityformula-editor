@@ -118,7 +118,10 @@ define( function ( require ) {
         },
 
         requestService: function ( serviceName, args ) {
-
+            // console.log('请求服务', serviceName, args);
+            if (serviceName === 'render.draw') {
+                console.log('drwa', args);
+            }
             var serviceObject =  getService.call( this, serviceName );
 
             return serviceObject.service[ serviceObject.key ].apply( serviceObject.provider, [].slice.call( arguments, 1 ) );
@@ -126,11 +129,9 @@ define( function ( require ) {
         },
 
         request: function ( serviceName ) {
-
+            // console.log('请求服务', serviceName);
             var serviceObject = getService.call( this, serviceName );
-
             return serviceObject.service;
-
         },
 
         registerService: function ( serviceName, provider, serviceObject ) {
@@ -163,6 +164,7 @@ define( function ( require ) {
         },
 
         execCommand: function ( commandName, args ) {
+            console.log('执行wgwy', commandName, args);
 
             var commandObject =  this.commands[ commandName ];
 
