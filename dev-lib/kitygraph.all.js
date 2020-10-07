@@ -3155,14 +3155,18 @@ define("graphic/matrix", [ "core/utils", "graphic/box", "graphic/point", "core/c
           case "parent":
             // 以父容器为参照坐标系
             if (target.node.parentNode) {
-                ctm = target.node.getTransformToElement(target.node.parentNode);
+                var node = target.node.parentNode;
+                ctm = node.getScreenCTM().inverse().multiply(target.node.getScreenCTM());
+                // ctm = target.node.getTransformToElement(target.node.parentNode);
             }
             break;
 
           default:
             // 其他情况，指定参照物
             if (refer.node) {
-                ctm = target.node.getTransformToElement(refer.shapeNode || refer.node);
+                var node = refer.shapeNode || refer.node;
+                ctm = node.getScreenCTM().inverse().multiply(target.node.getScreenCTM());
+                // ctm = target.node.getTransformToElement(refer.shapeNode || refer.node);
             }
         }
         return new Matrix(ctm.a, ctm.b, ctm.c, ctm.d, ctm.e, ctm.f);
